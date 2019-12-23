@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Web.Data;
+using Web.Repository;
 
 namespace Web
 {
@@ -27,6 +28,7 @@ namespace Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseMySql(_config["DefaultConnection"]));
+            services.AddTransient<IRepository, Repository.Repository>();
             services.AddControllersWithViews();
         }
 

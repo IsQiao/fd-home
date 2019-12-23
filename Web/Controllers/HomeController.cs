@@ -2,40 +2,66 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Web.Data;
 using Web.Models;
+using Web.Repository;
 
 namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        private AppDbContext _dbContext;
+        private IRepository _repository;
 
-        public HomeController(AppDbContext dbContext)
+        public HomeController(IRepository repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         // GET
         public IActionResult Index()
         {
-            return View();
+            var items = _repository.GetAllPosts();
+            return View(items);
         }
 
-        public IActionResult Post()
+        public IActionResult Post(int id)
         {
-            return View();
+            var item = _repository.GetPost(id);
+            if (item != null)
+                return View(item);
+            return NotFound();
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(int? id)
         {
-            return View(new Post());
+            if (id == null)
+                return View(new Post());
+
+            var item = _repository.GetPost(id.Value);
+            return View(item);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(Post post)
         {
-            _dbContext.Posts.Add(post);
-            await _dbContext.SaveChangesAsync();
+            if (post.Id > 0)
+                _repository.UpdatePost(post);
+            else
+                _repository.AddPost(post);
+
+            if (await _repository.SaveChangesAsync())
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(post);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Remove(int id)
+        {
+            _repository.RemovePost(id);
+            await _repository.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
     }
