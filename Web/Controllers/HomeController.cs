@@ -8,7 +8,7 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepository _repository;
+        private readonly IRepository _repository;
 
         public HomeController(IRepository repository)
         {
