@@ -1,0 +1,28 @@
+.blog-header {
+    height: 28px;
+    font-size: 0.75rem;
+}
+
+.blog-header-logo {
+    margin-top: 37px;
+    z-index: 999;
+}
+
+.blog-header-logo img {
+    height: 70px;
+}
+
+#carouselExampleControls {
+    margin-top: -40px;
+}
+
+.carousel-inner {
+    height: 450px;
+}
+.web-nav .nav-item a{
+    text-shadow: 2px 2px 4px black;
+}
+.navbar-fixed{
+    background-color: #383032!important;
+    border-bottom: 1px solid;
+}

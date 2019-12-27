@@ -43,7 +43,7 @@ namespace Web
             services.ConfigureApplicationCookie(opt => { opt.LoginPath = "/Auth/Login"; });
 
             services.AddTransient<IRepository, Repository.Repository>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();;;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
