@@ -5,7 +5,7 @@
 
 .blog-header-logo {
     margin-top: 37px;
-    z-index: 999;
+    z-index: 9999;
 }
 
 .blog-header-logo img {
@@ -13,16 +13,31 @@
 }
 
 #carouselExampleControls {
-    margin-top: -40px;
+   /** margin-top: -40px;**/
+}
+#navbarMain{
+    background-color: #383032 !important;
 }
 
 .carousel-inner {
     height: 450px;
 }
-.web-nav .nav-item a{
+.carousel-inner img{
+    height: 450px;
+}
+
+.web-nav .nav-item a {
     text-shadow: 2px 2px 4px black;
 }
-.navbar-fixed{
-    background-color: #383032!important;
+
+.navbar-fixed {
+    background-color: #383032 !important;
     border-bottom: 1px solid;
+}
+
+footer {
+    height: 150px;
+    background-color: #383032 !important;
+    color: #c7c0c4;
+    font-size: 0.75rem;
 }
