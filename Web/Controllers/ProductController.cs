@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class PanelController : BaseController
+    public class ProductController : BaseController
     {
+        // GET
         public IActionResult Index()
         {
             return View();

@@ -1,0 +1,13 @@
+@model LoginViewModel
+
+<form asp-route="/Area/Auth/Login" method="post">
+    <div>
+        <label>Username</label>
+        <input asp-for="UserName" value="admin" type="text"/>
+    </div>
+    <div>
+        <label>Password</label>
+        <input asp-for="Password" value="password" type="password"/>
+    </div>
+    <input value="Sign In" type="submit"/>
+</form>

@@ -7,11 +7,12 @@ namespace Web.Data
     public class AppDbContext : IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
-        :base(options)
+            : base(options)
         {
-            
         }
-        
+
         public DbSet<Post> Posts { get; set; }
+
+        public DbSet<PostCategory> PostCategory { get; set; }
     }
 }

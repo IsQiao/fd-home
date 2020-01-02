@@ -1,21 +1,46 @@
-@model IEnumerable<Post>
+@{
+    Layout = "~/Views/Shared/_LayoutWithBanner.cshtml";
+}
 
-<h2>Home Page</h2>
-<ul>
-    @foreach (var item in Model)
+@model IEnumerable<Post>
+<p>
+    <div>
+
+        <img src="images/04.jpg" alt="" width="223" height="157"/>
+        凡渡是一家巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉企业，创立于XXXX年，主要从事XXXXXX的一家XXXX公司。
+    </div>
+</p>
+<div style=" display: none;">
+    <a asp-controller="Home" asp-action="Index">Home</a>
+    <a asp-controller="Home" asp-action="Edit">Create Post</a>
+    @if (!User.Identity.IsAuthenticated)
     {
-        <li>
-            <a asp-controller="Home" asp-action="Post" asp-route-id="@item.Id">
-                @item.Title
-            </a>
-            -
-            <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.Id">
-                Edit
-            </a>
-            -
-            <a asp-controller="Home" asp-action="Remove" asp-route-id="@item.Id">
-                Remove
-            </a>
-        </li>
+        <a asp-controller="Auth" asp-action="Login">Sign In</a>
     }
-</ul>
+    else
+    {
+        <a asp-controller="Auth" asp-action="Logout">LogOut</a>
+    }
+    <a asp-controller="Panel" asp-action="Index">Admin Panel</a>
+
+
+    <h2>Home Page</h2>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <a asp-controller="Home" asp-action="Post" asp-route-id="@item.Id">
+                    @item.Title
+                </a>
+                -
+                <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.Id">
+                    Edit
+                </a>
+                -
+                <a asp-controller="Home" asp-action="Remove" asp-route-id="@item.Id">
+                    Remove
+                </a>
+            </li>
+        }
+    </ul>
+</div>

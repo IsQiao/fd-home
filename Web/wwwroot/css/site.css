@@ -13,16 +13,18 @@
 }
 
 #carouselExampleControls {
-   /** margin-top: -40px;**/
+    /** margin-top: -40px;**/
 }
-#navbarMain{
+
+#navbarMain {
     background-color: #383032 !important;
 }
 
 .carousel-inner {
     height: 450px;
 }
-.carousel-inner img{
+
+.carousel-inner img {
     height: 450px;
 }
 
@@ -40,4 +42,12 @@ footer {
     background-color: #383032 !important;
     color: #c7c0c4;
     font-size: 0.75rem;
+}
+
+.logo-color {
+    color: #e17836;
+}
+
+.product-a-box a {
+    color: black;
 }

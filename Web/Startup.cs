@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Web.Data;
+using Web.Managers;
 using Web.Repository;
 
 namespace Web
@@ -43,7 +44,9 @@ namespace Web
             services.ConfigureApplicationCookie(opt => { opt.LoginPath = "/Auth/Login"; });
 
             services.AddTransient<IRepository, Repository.Repository>();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();;;
+            services.AddTransient<IImageManager, ImageManager>();
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +67,8 @@ namespace Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute("area", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 //endpoints.MapRazorPages();
             });
         }
