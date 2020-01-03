@@ -29,7 +29,7 @@ namespace Web.Managers
                 var fileName = $"img_{DateTime.Now:yyyMMddHHmmss}";
                 await using (var fileStream = new FileStream(Path.Combine(savePath, fileName), FileMode.Create))
                 {
-                    image.CopyToAsync(fileStream);
+                    await image.CopyToAsync(fileStream);
                 }
 
                 return fileName;

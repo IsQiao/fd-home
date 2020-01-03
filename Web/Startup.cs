@@ -45,7 +45,7 @@ namespace Web
 
             services.AddTransient<IRepository, Repository.Repository>();
             services.AddTransient<IImageManager, ImageManager>();
-
+           
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
@@ -68,8 +68,6 @@ namespace Web
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllerRoute("area", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapRazorPages();
             });
         }
     }

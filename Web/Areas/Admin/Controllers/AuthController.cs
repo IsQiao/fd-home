@@ -14,25 +14,37 @@ namespace Web.Controllers.Admin
         {
             _sinInManager = signInManager;
         }
-        
+
         // GET
-        public IActionResult Login()
-        {
-            return View(new LoginViewModel());
-        }
-        
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
             var result = await _sinInManager.PasswordSignInAsync(vm.UserName, vm.Password, false, false);
-            return RedirectToAction("Index", "Panel");
+
+            return RedirectToRoute("area", new
+            {
+                area = "Admin",
+                controller = "Home",
+                action = "Index"
+            });
         }
-        
+
+        public IActionResult Login()
+        {
+            return View(new LoginViewModel());
+        }
+
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _sinInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult UserInfo()
+        {
+            return View();
         }
     }
 }
