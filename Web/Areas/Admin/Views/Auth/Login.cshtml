@@ -1,13 +1,32 @@
 @model LoginViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "";
+}
 
-<form asp-route="/Area/Auth/Login" method="post">
-    <div>
-        <label>Username</label>
-        <input asp-for="UserName" value="admin" type="text"/>
+<div class="page login-page">
+    <div class="container">
+        <div class="form-outer text-center d-flex align-items-center">
+            <div class="form-inner" style="min-width: 500px;">
+                <div class="logo text-uppercase">
+                    <span>凡渡</span><strong class="text-primary">管理后台</strong>
+                </div>
+                <p>请输入账号密码进行登陆</p>
+                <form method="post" class="text-left form-validate" asp-route="/Area/Auth/Login">
+                    <div class="form-group-material">
+                        <input asp-for="UserName" id="login-username" type="text" required data-msg="Please enter your username" class="input-material">
+                        <label for="login-username" class="label-material">用户名</label>
+                    </div>
+                    <div class="form-group-material">
+                        <input asp-for="Password" id="login-password" type="password" required data-msg="Please enter your password" class="input-material">
+                        <label for="login-password" class="label-material">密码</label>
+                    </div>
+                    <div class="form-group text-center">
+                        <input value="登陆" type="submit" class="btn btn-primary"/>
+                        <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div>
-        <label>Password</label>
-        <input asp-for="Password" value="password" type="password"/>
-    </div>
-    <input value="Sign In" type="submit"/>
-</form>
+</div>
