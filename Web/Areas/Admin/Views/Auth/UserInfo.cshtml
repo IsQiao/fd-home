@@ -1,15 +1,13 @@
-@page
-
+@model ChangePasswordViewModel
 @{
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<!-- Breadcrumb-->
 <div class="breadcrumb-holder">
     <div class="container-fluid">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <a href="/admin">首页</a>
             </li>
             <li class="breadcrumb-item active">用户信息 </li>
         </ul>
@@ -28,22 +26,21 @@
                         <h4>修改密码</h4>
                     </div>
                     <div class="card-body">
-                        <p>请输入原密码进行修改.</p>
-                        <form>
+                        <form method="post" asp-route="/Area/Auth/UserInfo">
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" placeholder="Email Address" class="form-control">
+                                <label>旧密码</label>
+                                <input type="password" asp-for="OldPassword" placeholder="请输入旧密码" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" placeholder="Email Address" class="form-control">
+                                <label>新密码</label>
+                                <input type="password" asp-for="NewPassword" placeholder="请输入新密码" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" placeholder="Password" class="form-control">
+                                <label>确认新密码</label>
+                                <input type="password" asp-for="NewPasswordConfirmed" placeholder="请再次输入新密码" class="form-control">
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Signin" class="btn btn-primary">
+                                <input type="submit" value="修改" class="btn btn-primary">
                             </div>
                         </form>
                     </div>

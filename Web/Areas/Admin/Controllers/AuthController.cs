@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Web.ViewModels;
@@ -6,6 +7,7 @@ using Web.ViewModels;
 namespace Web.Controllers.Admin
 {
     [Area("Admin")]
+    [Authorize]
     public class AuthController : Controller
     {
         private readonly SignInManager<IdentityUser> _sinInManager;
@@ -15,11 +17,14 @@ namespace Web.Controllers.Admin
             _sinInManager = signInManager;
         }
 
-        // GET
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
             var result = await _sinInManager.PasswordSignInAsync(vm.UserName, vm.Password, false, false);
+
+            if (Url.IsLocalUrl(vm.ReturnUrl))
+                return Redirect(vm.ReturnUrl);
 
             return RedirectToRoute("area", new
             {
@@ -29,6 +34,7 @@ namespace Web.Controllers.Admin
             });
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View(new LoginViewModel());
@@ -45,6 +51,30 @@ namespace Web.Controllers.Admin
         public IActionResult UserInfo()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UserInfo(ChangePasswordViewModel viewModel)
+        {
+            if (viewModel.NewPassword != viewModel.NewPasswordConfirmed ||
+                string.IsNullOrWhiteSpace(viewModel.NewPassword))
+            {
+                return View("ChangePasswordFailed");
+            }
+
+            var currentUser = await _sinInManager.UserManager.GetUserAsync(HttpContext.User);
+            if (currentUser != null)
+            {
+                await _sinInManager.UserManager.RemovePasswordAsync(currentUser);
+                await _sinInManager.UserManager.AddPasswordAsync(currentUser, viewModel.NewPassword);
+            }
+            else
+            {
+                return View("ChangePasswordFailed");
+            }
+
+            await _sinInManager.SignOutAsync();
+            return View("ChangePasswordSucceed");
         }
     }
 }

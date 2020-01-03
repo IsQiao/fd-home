@@ -41,7 +41,7 @@ namespace Web
                 })
                 .AddEntityFrameworkStores<AppDbContext>();
 
-            services.ConfigureApplicationCookie(opt => { opt.LoginPath = "/Auth/Login"; });
+            services.ConfigureApplicationCookie(opt => { opt.LoginPath = "/Admin/Auth/Login"; });
 
             services.AddTransient<IRepository, Repository.Repository>();
             services.AddTransient<IImageManager, ImageManager>();
