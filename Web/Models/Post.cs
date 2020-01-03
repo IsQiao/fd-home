@@ -25,6 +25,8 @@ namespace Web.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
+        
+        public PostType PostType { get; set; } = PostType.News;
 
         public List<Post> Posts { get; set; }
     }
