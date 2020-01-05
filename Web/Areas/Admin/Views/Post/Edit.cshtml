@@ -1,0 +1,91 @@
+@model PostViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/admin">首页</a>
+            </li>
+            <li class="breadcrumb-item active">内容管理 </li>
+        </ul>
+    </div>
+</div>
+<section class="forms">
+    <div class="container-fluid">
+        <!-- Page Header-->
+        <header>
+            <h1 class="h3 display">新增内容 </h1>
+        </header>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" asp-route="/Admin/Post/Edit" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>类别</label>
+                                <select asp-for="PostType" class="form-control">
+                                    <option value="0" selected>新闻</option>
+                                    <option value="1">产品</option>
+                                    <option value="2">关于我们</option>
+                                    <option value="3">联系我们</option>
+                                    <option value="4">空间展示</option>
+                                    <option value="5">技术支持</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>标题</label>
+                                <input type="text" asp-for="Title" placeholder="请输入标题" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>展示图片</label>
+                                <input type="file" asp-for="Icon" placeholder="请选择要展示的图片" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>内容分类</label>
+                                <select class="form-control">
+                                    <option value="0" selected>新闻</option>
+                                    <option value="1">产品</option>
+                                    <option value="2">关于我们</option>
+                                    <option value="3">联系我们</option>
+                                    <option value="4">空间展示</option>
+                                    <option value="5">技术支持</option>
+                                </select>
+                                @* <input type="text" asp-for="" placeholder="请输入内容" class="form-control"> *@
+                            </div>
+                            <div class="form-group">
+                                <label>内容</label>
+                                <input type="text" id="trumbowyg-demo" asp-for="Body" placeholder="请输入内容" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="提交" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/lib/trumbowyg/dist/trumbowyg.min.js"></script>
+    <script src="~/lib/trumbowyg/dist/plugins/upload/trumbowyg.upload.min.js"></script>
+    <script>
+    $('#trumbowyg-demo').trumbowyg({
+    btns: [
+            ['upload'],
+            ['strong', 'em'],
+            ['justifyLeft', 'justifyCenter'],
+            ['insertImage', 'link']
+        ],
+        plugins: {
+            upload: {
+                // Some upload plugin options, see details below
+            }
+        }
+    });
+    </script>
+}

@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap-admin/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="~/lib/bootstrap-admin/css/custom.css">
+
+    <link rel="stylesheet" href="~/lib/trumbowyg/dist/ui/trumbowyg.min.css"/>
 </head>
 <body>
 @RenderBody()
@@ -34,5 +36,7 @@
 <script src="~/lib/bootstrap-admin/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 <!-- Main File-->
 <script src="~/lib/bootstrap-admin/js/front.js"></script>
+
+@RenderSection("Scripts", required: false)
 </body>
 </html>

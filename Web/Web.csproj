@@ -22,4 +22,9 @@
       <_ContentIncludedByDefault Remove="Views\Auth\Login.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="wwwroot\lib\trumbowyg\.github\FUNDING.yml" />
+      <Content Include="wwwroot\lib\trumbowyg\.github\ISSUE_TEMPLATE.md" />
+    </ItemGroup>
+
 </Project>

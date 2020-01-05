@@ -5,3 +5,5 @@ Web/bin/
 
 .DS_Store
 .idea/.idea.FanDuWeb/
+
+Web/wwwroot/content/blog/

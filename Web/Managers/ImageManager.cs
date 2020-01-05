@@ -27,7 +27,7 @@ namespace Web.Managers
 
                 var mine = image.FileName.Substring(image.FileName.LastIndexOf(('.')));
                 var fileName = $"img_{DateTime.Now:yyyMMddHHmmss}";
-                await using (var fileStream = new FileStream(Path.Combine(savePath, fileName), FileMode.Create))
+                await using (var fileStream = new FileStream(Path.Combine(savePath, fileName + mine), FileMode.Create))
                 {
                     await image.CopyToAsync(fileStream);
                 }
