@@ -1,6 +1,8 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Managers;
 using Web.ViewModels;
@@ -12,12 +14,12 @@ namespace Web.Controllers.Admin
     public class PostController : Controller
     {
         private readonly AppDbContext _dbContext;
-        private IImageManager _imageManager;
+        private IFileManager _fileManager;
 
-        public PostController(AppDbContext dbContext, IImageManager imageManager)
+        public PostController(AppDbContext dbContext, IFileManager fileManager)
         {
             _dbContext = dbContext;
-            _imageManager = imageManager;
+            _fileManager = fileManager;
         }
 
         public IActionResult Index()
@@ -26,8 +28,16 @@ namespace Web.Controllers.Admin
         }
 
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
+            var options = await _dbContext.PostCategory.ToListAsync();
+            ViewBag.AllOptions = options.Select(x => new
+            {
+                Value = x.Id,
+                x.Name,
+                x.PostType
+            }).ToList();
+
             return View();
         }
 
@@ -36,7 +46,7 @@ namespace Web.Controllers.Admin
         {
             if (viewModel.Icon != null)
             {
-                viewModel.IconSrc = await _imageManager.SaveImageAsync(viewModel.Icon);
+                viewModel.IconSrc = await _fileManager.SaveImageAsync(viewModel.Icon);
             }
 
             if (viewModel.Id != 0)

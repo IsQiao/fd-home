@@ -6,11 +6,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace Web.Managers
 {
-    public class ImageManager : IImageManager
+    public class FileManager : IFileManager
     {
         private readonly string _imagePath;
 
-        public ImageManager(IConfiguration config)
+        public FileManager(IConfiguration config)
         {
             _imagePath = config["Path:Images"];
         }
@@ -26,8 +26,8 @@ namespace Web.Managers
                 }
 
                 var mine = image.FileName.Substring(image.FileName.LastIndexOf(('.')));
-                var fileName = $"img_{DateTime.Now:yyyMMddHHmmss}";
-                await using (var fileStream = new FileStream(Path.Combine(savePath, fileName + mine), FileMode.Create))
+                var fileName = $"img_{DateTime.Now:yyyMMddHHmmss}" + mine;
+                await using (var fileStream = new FileStream(Path.Combine(savePath, fileName), FileMode.Create))
                 {
                     await image.CopyToAsync(fileStream);
                 }

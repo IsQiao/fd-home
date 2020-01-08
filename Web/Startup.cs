@@ -44,7 +44,7 @@ namespace Web
             services.ConfigureApplicationCookie(opt => { opt.LoginPath = "/Admin/Auth/Login"; });
 
             services.AddTransient<IRepository, Repository.Repository>();
-            services.AddTransient<IImageManager, ImageManager>();
+            services.AddTransient<IFileManager, FileManager>();
            
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }

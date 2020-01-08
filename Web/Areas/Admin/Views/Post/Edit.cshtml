@@ -45,19 +45,12 @@
                             </div>
                             <div class="form-group">
                                 <label>内容分类</label>
-                                <select class="form-control">
-                                    <option value="0" selected>新闻</option>
-                                    <option value="1">产品</option>
-                                    <option value="2">关于我们</option>
-                                    <option value="3">联系我们</option>
-                                    <option value="4">空间展示</option>
-                                    <option value="5">技术支持</option>
+                                <select asp-for="PostCategory" class="form-control">
                                 </select>
-                                @* <input type="text" asp-for="" placeholder="请输入内容" class="form-control"> *@
                             </div>
                             <div class="form-group">
                                 <label>内容</label>
-                                <input type="text" id="trumbowyg-demo" asp-for="Body" placeholder="请输入内容" class="form-control">
+                                <textarea asp-for="Body" id="trumbowyg-demo"></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="提交" class="btn btn-primary">
@@ -74,18 +67,104 @@
     <script src="~/lib/trumbowyg/dist/trumbowyg.min.js"></script>
     <script src="~/lib/trumbowyg/dist/plugins/upload/trumbowyg.upload.min.js"></script>
     <script>
-    $('#trumbowyg-demo').trumbowyg({
-    btns: [
-            ['upload'],
-            ['strong', 'em'],
-            ['justifyLeft', 'justifyCenter'],
-            ['insertImage', 'link']
-        ],
-        plugins: {
-            upload: {
-                // Some upload plugin options, see details below
+    const postTypeDom = document.getElementsByName("PostType")[0];
+    const postCategoryDom = document.getElementsByName("PostCategory")[0];
+    const iconDom = document.getElementsByName("Icon")[0];
+    const titleDom = document.getElementsByName("Title")[0];
+    
+    function bindEditor(){
+         $('#trumbowyg-demo').trumbowyg({
+                btnsDef: {
+                    // Create a new dropdown
+                    image: {
+                        dropdown: ['insertImage', 'upload'],
+                        ico: 'insertImage'
+                    }
+                },
+                // Redefine the button pane
+                btns: [
+                    ['viewHTML'],
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['superscript', 'subscript'],
+                    ['link'],
+                    ['image'], // Our fresh created dropdown
+                    ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ['unorderedList', 'orderedList'],
+                    ['horizontalRule'],
+                    ['removeformat'],
+                    ['fullscreen']
+                ],
+                plugins: {
+                    // Add imagur parameters to upload plugin for demo purposes
+                    upload: {
+                        serverPath: '/Admin/File/Image',
+                        fileFieldName: 'file',
+                        // headers: {
+                        //     'Authorization': 'Client-ID xxxxxxxxxxxx'
+                        // },
+                       // urlPropertyName: 'fileSrc'
+                    }
+                }
+            });
+    }
+    
+    function bindSecondSelector() {
+         const firstSelectorDom = postTypeDom;
+         
+         firstSelectorDom.onchange = function () {
+             const selectedVal=firstSelectorDom.value;
+             if((selectedVal=="0"||selectedVal=="1")){
+                 showOthers(true);
+             }
+             else {
+                 showOthers(false);
+                 clearOthersContent();
+             }
+             
+             refreshSecondSelector(selectedVal);
+         }
+    }
+    
+    function refreshSecondSelector(selectedValue) {
+        const secondSelectedAllOptions = JSON.parse( '@Html.Raw( Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.AllOptions))');
+        const secondSelectorDom = postCategoryDom;
+        let secondSelectorHtmlStr = "";
+        for (i = 0; i < secondSelectedAllOptions.length; i++)
+        {
+            if (secondSelectedAllOptions[i].PostType == selectedValue)
+            {
+                secondSelectorHtmlStr += "<option value='" + secondSelectedAllOptions[i].Value + "'>" + secondSelectedAllOptions[i].Name + "</option>";
             }
         }
-    });
+        secondSelectorDom.innerHTML = secondSelectorHtmlStr;
+    }
+    
+    function show(dom,isShow) {
+        if(isShow){
+            dom.style.display = "inline";
+        }
+        else {
+            dom.style.display = "none";
+        }
+    }
+    
+    function showOthers(isShow) {
+        show(iconDom.parentElement,isShow);
+        show(postCategoryDom.parentElement,isShow);
+        show(titleDom.parentElement,isShow);
+    }
+    
+    function clearOthersContent() {
+        iconDom.value=null;
+        postCategoryDom.value=null;
+        titleDom.value=null;
+    }
+    
+    (function () {
+        refreshSecondSelector(0);
+        bindEditor();
+        bindSecondSelector();
+    })(document, window);
     </script>
 }

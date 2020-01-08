@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Web.Managers
 {
-    public interface IImageManager
+    public interface IFileManager
     {
         Task<string> SaveImageAsync(IFormFile image);
 
