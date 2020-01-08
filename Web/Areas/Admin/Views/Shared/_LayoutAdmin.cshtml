@@ -1,3 +1,6 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -9,7 +12,7 @@
             <!-- User Info-->
             <div class="sidenav-header-inner text-center">
                 <img src="~/lib/bootstrap-admin/img/avatar-7.jpg" alt="person" class="img-fluid rounded-circle">
-                <h2 class="h5">Admin</h2><span>超级管理员</span>
+                <h2 class="h5">@UserManager.GetUserName(User)</h2><span>超级管理员</span>
             </div>
             <!-- Small Brand information, appears on minimized sidebar-->
             <div class="sidenav-header-logo">
