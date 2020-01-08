@@ -14,7 +14,7 @@ namespace Web.Controllers.Admin
     public class PostController : Controller
     {
         private readonly AppDbContext _dbContext;
-        private IFileManager _fileManager;
+        private readonly IFileManager _fileManager;
 
         public PostController(AppDbContext dbContext, IFileManager fileManager)
         {
@@ -26,8 +26,7 @@ namespace Web.Controllers.Admin
         {
             return View();
         }
-
-
+        
         public async Task<IActionResult> Edit(int? id)
         {
             var options = await _dbContext.PostCategory.ToListAsync();

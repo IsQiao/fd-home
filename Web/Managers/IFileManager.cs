@@ -9,5 +9,7 @@ namespace Web.Managers
         Task<string> SaveImageAsync(IFormFile image);
 
         FileStream ImageStream(string imageSrc);
+
+        void DeleteFileAsync(string fileName);
     }
 }

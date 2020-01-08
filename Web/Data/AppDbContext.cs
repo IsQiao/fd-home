@@ -14,5 +14,7 @@ namespace Web.Data
         public DbSet<Post> Posts { get; set; }
 
         public DbSet<PostCategory> PostCategory { get; set; }
+
+        public DbSet<Upload> Uploads { get; set; }
     }
 }
