@@ -49,6 +49,12 @@ namespace Web.Controllers.Admin
                 viewModel.IconSrc = await _fileManager.SaveImageAsync(viewModel.Icon);
             }
 
+            if (viewModel.PostCategoryId != null)
+            {
+                viewModel.PostCategory =
+                    await _dbContext.PostCategory.FirstOrDefaultAsync(x => x.Id == viewModel.PostCategoryId);
+            }
+
             if (viewModel.Id != 0)
             {
                 _dbContext.Posts.Update(viewModel);
@@ -60,13 +66,17 @@ namespace Web.Controllers.Admin
 
             await _dbContext.SaveChangesAsync();
 
+            return RedirectToRoute("area", new
+            {
+                area = "Admin",
+                controller = "Post",
+                action = "List"
+            });
+        }
+
+        public IActionResult List()
+        {
             return View();
-            // return RedirectToRoute("area", new
-            // {
-            //     area = "Admin",
-            //     controller = "PostCategory",
-            //     action = "List"
-            // });
         }
     }
 }

@@ -19,13 +19,13 @@ namespace Web.Controllers.Admin
             _dbContext = dbContext;
         }
 
-        public IActionResult Add()
+        public IActionResult Edit()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(PostCategory vm)
+        public async Task<IActionResult> Edit(PostCategory vm)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +55,12 @@ namespace Web.Controllers.Admin
         {
             if (id != null)
             {
+                var isExistPost = await _dbContext.Posts.AnyAsync(x => x.PostCategory.Id == id);
+                if (isExistPost)
+                {
+                    return View("CantDeletePostCategory");
+                }
+
                 var item = await _dbContext.PostCategory.FirstOrDefaultAsync(x => x.Id == id);
                 if (item != null)
                 {

@@ -23,7 +23,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" asp-route="/Admin/PostCategory/Add">
+                        <form id="myForm" method="post" asp-route="/Admin/PostCategory/Edit">
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">类别</label>
                                 <div class="col-sm-10 ">
@@ -38,7 +38,7 @@
                                 <input type="text" asp-for="Name" placeholder="请输入内容分类名称" class="form-control">
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="提交" class="btn btn-primary">
+                                <input type="button" onclick="formCommit()" value="提交" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
@@ -47,3 +47,15 @@
         </div>
     </div>
 </section>
+
+@section Scripts{
+    <script>
+        function formCommit() {
+            if(document.getElementsByName("Name")[0].value.trim()==""){
+                alert('请将表单补充完整');
+                return;
+            }
+            document.getElementById("myForm").submit();
+        }
+    </script>
+}

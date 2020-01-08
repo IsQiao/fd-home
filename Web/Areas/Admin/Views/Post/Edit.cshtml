@@ -23,7 +23,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" asp-route="/Admin/Post/Edit" enctype="multipart/form-data">
+                        <form id="myForm" method="post" asp-route="/Admin/Post/Edit" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>类别</label>
                                 <select asp-for="PostType" class="form-control">
@@ -36,16 +36,16 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>标题</label>
+                                <label>标题*</label>
                                 <input type="text" asp-for="Title" placeholder="请输入标题" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>展示图片</label>
-                                <input type="file" asp-for="Icon" placeholder="请选择要展示的图片" class="form-control">
+                                <input type="file" accept="image/*" asp-for="Icon" placeholder="请选择要展示的图片" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>内容分类</label>
-                                <select asp-for="PostCategory" class="form-control">
+                                <label>内容分类*</label>
+                                <select asp-for="PostCategoryId" class="form-control">
                                 </select>
                             </div>
                             <div class="form-group">
@@ -53,7 +53,7 @@
                                 <textarea asp-for="Body" id="trumbowyg-demo"></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="提交" class="btn btn-primary">
+                                <input type="button" onclick="formCommit()" value="提交" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
@@ -68,9 +68,18 @@
     <script src="~/lib/trumbowyg/dist/plugins/upload/trumbowyg.upload.min.js"></script>
     <script>
     const postTypeDom = document.getElementsByName("PostType")[0];
-    const postCategoryDom = document.getElementsByName("PostCategory")[0];
+    const postCategoryDom = document.getElementsByName("PostCategoryId")[0];
     const iconDom = document.getElementsByName("Icon")[0];
     const titleDom = document.getElementsByName("Title")[0];
+    
+    function formCommit() {
+        if(titleDom.value.trim()==""){
+            alert('请将表单补充完整');
+            return;
+        }
+        document.getElementById("myForm").submit();
+      
+    }
     
     function bindEditor(){
          $('#trumbowyg-demo').trumbowyg({
