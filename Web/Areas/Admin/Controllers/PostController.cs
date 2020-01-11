@@ -1,10 +1,15 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
+using Web.Extensions;
 using Web.Managers;
+using Web.Models;
 using Web.ViewModels;
 
 namespace Web.Controllers.Admin
@@ -15,18 +20,20 @@ namespace Web.Controllers.Admin
     {
         private readonly AppDbContext _dbContext;
         private readonly IFileManager _fileManager;
+        private readonly IMapper _mapper;
 
-        public PostController(AppDbContext dbContext, IFileManager fileManager)
+        public PostController(AppDbContext dbContext, IFileManager fileManager, IMapper mapper)
         {
             _dbContext = dbContext;
             _fileManager = fileManager;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-        
+
         public async Task<IActionResult> Edit(int? id)
         {
             var options = await _dbContext.PostCategory.ToListAsync();
@@ -36,6 +43,12 @@ namespace Web.Controllers.Admin
                 x.Name,
                 x.PostType
             }).ToList();
+
+            if (id != null)
+            {
+                var item = await _dbContext.Posts.FirstOrDefaultAsync(x => x.Id == id);
+                return View(_mapper.Map<PostViewModel>(item));
+            }
 
             return View();
         }
@@ -73,9 +86,15 @@ namespace Web.Controllers.Admin
             });
         }
 
-        public IActionResult List()
+        public async Task<IActionResult> List(PagerViewModel viewModel)
         {
-            return View();
+            var list = _dbContext
+                .Posts
+                .Include(x => x.PostCategory)
+                .OrderByDescending(x => x.Created);
+
+            return View(_mapper.Map<IEnumerable<PostListViewModel>>(list)
+                .GetPaged(viewModel.PageNo, viewModel.PageSize));
         }
     }
 }

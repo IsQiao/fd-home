@@ -1,4 +1,5 @@
-@model  List<PostCategory>
+@using Web.Areas.Admin.ViewComponents
+@model  PagedResult<PostListViewModel> 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -31,27 +32,34 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table  table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>类别</th>
+                                    <th>内容大类</th>
+                                    <th>内容小类</th>
                                     <th>名称</th>
+                                    <th>创建时间</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @if (Model != null)
                                 {
-                                    @foreach (var postCategory in Model)
+                                    @foreach (var item in Model.Results)
                                     {
                                         <tr>
-                                            <th scope="row">@postCategory.Id</th>
-                                            <td>@postCategory.PostType.ToPostTypeDisplayName()</td>
-                                            <td>@postCategory.Name</td>
+                                            <th scope="row">@item.Id</th>
+                                            <td>@item.PostTypeDisplay</td>
+                                            <td>@item.PostCategoryDisplay</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.CreatedTime.ToString("yyyy-MM-dd HH:mm")</td>
                                             <td>
-                                                <a href="/admin/PostCategory/Delete/@postCategory.Id">
-                                                    <input type="submit" value="删除" class="btn btn-primary">
+                                                <a href="/admin/Post/Edit/@item.Id">
+                                                    <input type="button" value="编辑" class="btn btn-primary">
+                                                </a>
+                                                <a href="/admin/Post/Delete/@item.Id">
+                                                    <input type="button" value="删除" class="btn btn-primary">
                                                 </a>
                                             </td>
                                         </tr>
@@ -60,6 +68,8 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        @(await Component.InvokeAsync<PaginationViewComponent>(Model))
                     </div>
                 </div>
             </div>
