@@ -14,6 +14,10 @@ namespace Web.Extensions
             {
                 PostType.News => "新闻",
                 PostType.Product => "产品",
+                PostType.AboutUs => "关于我们",
+                PostType.ContactUs => "联系我们",
+                PostType.Display => "空间展示",
+                PostType.Support => "技术支持",
                 _ => ""
             };
         }

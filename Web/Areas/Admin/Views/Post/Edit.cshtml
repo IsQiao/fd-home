@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <!-- Page Header-->
         <header>
-            <h1 class="h3 display">新增内容 </h1>
+            <h1 class="h3 display">@(Model == null ? "新增内容" : "修改内容")</h1>
         </header>
         <div class="row">
             <div class="col">
@@ -53,7 +53,10 @@
                                 <textarea asp-for="Body" id="trumbowyg-demo"></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="button" onclick="formCommit()" value="提交" class="btn btn-primary">
+                                <input type="button" onclick="formCommit()" value="提交" class="btn btn-primary mr-2">
+                                <a href="/admin/Post/List" target="_self">
+                                    <input type="button" value="返回" class="btn btn-secondary">
+                                </a>
                             </div>
                         </form>
                     </div>
@@ -73,12 +76,13 @@
     const titleDom = document.getElementsByName("Title")[0];
     
     function formCommit() {
-        if(titleDom.value.trim()==""){
-            alert('请将表单补充完整');
-            return;
+        if([0,1].indexOf(postTypeDom.value) !=-1){
+            if(titleDom.value.trim()==""){
+                alert('请将表单补充完整');
+                return;
+            }
         }
         document.getElementById("myForm").submit();
-      
     }
     
     function bindEditor(){
@@ -119,24 +123,27 @@
     }
     
     function bindSecondSelector() {
-         const firstSelectorDom = postTypeDom;
-         
-         firstSelectorDom.onchange = function () {
-             const selectedVal=firstSelectorDom.value;
-             if((selectedVal=="0"||selectedVal=="1")){
-                 showOthers(true);
-             }
-             else {
-                 showOthers(false);
-                 clearOthersContent();
-             }
-             
-             refreshSecondSelector(selectedVal);
+ 
+         postTypeDom.onchange = function () {
+             firstSelectorChange();
          }
     }
     
+    function firstSelectorChange() {
+        const firstSelectorDom = postTypeDom;
+        const selectedVal=firstSelectorDom.value;
+        if((selectedVal=="0"||selectedVal=="1")){
+           showOthers(true);
+        }
+        else {
+           showOthers(false);
+           clearOthersContent();
+        }
+        refreshSecondSelector(selectedVal);
+    }
+    
     function refreshSecondSelector(selectedValue) {
-        const secondSelectedAllOptions = JSON.parse( '@Html.Raw( Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.AllOptions))');
+        const secondSelectedAllOptions = JSON.parse( '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.AllOptions))');
         const secondSelectorDom = postCategoryDom;
         let secondSelectorHtmlStr = "";
         for (i = 0; i < secondSelectedAllOptions.length; i++)
@@ -171,9 +178,9 @@
     }
     
     (function () {
-        refreshSecondSelector(0);
         bindEditor();
         bindSecondSelector();
+        firstSelectorChange();
     })(document, window);
     </script>
 }

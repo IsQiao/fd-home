@@ -2,14 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Extensions;
 using Web.Managers;
-using Web.Models;
 using Web.ViewModels;
 
 namespace Web.Controllers.Admin
@@ -27,11 +25,6 @@ namespace Web.Controllers.Admin
             _dbContext = dbContext;
             _fileManager = fileManager;
             _mapper = mapper;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -86,10 +79,14 @@ namespace Web.Controllers.Admin
             });
         }
 
-        public async Task<IActionResult> List(PagerViewModel viewModel)
+        public async Task<IActionResult> List(PostPagerRequest viewModel)
         {
+            ViewBag.PagerFilter = viewModel;
+            
             var list = _dbContext
                 .Posts
+                .Where(x => viewModel.PostType == null || x.PostType == viewModel.PostType)
+                .Where(x => viewModel.SearchString == null || x.Title.Contains(viewModel.SearchString))
                 .Include(x => x.PostCategory)
                 .OrderByDescending(x => x.Created);
 

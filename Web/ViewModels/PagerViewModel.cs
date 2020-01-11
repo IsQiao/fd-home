@@ -8,6 +8,8 @@ namespace Web.ViewModels
         public int PageNo { get; set; } = 1;
 
         public int PageSize { set; get; } = 10;
+
+        public string SearchString { get; set; }
     }
 
     public abstract class PagedResultBase

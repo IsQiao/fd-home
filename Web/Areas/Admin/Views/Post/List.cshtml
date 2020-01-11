@@ -2,6 +2,7 @@
 @model  PagedResult<PostListViewModel> 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var pagerFilter = (PostPagerRequest) ViewBag.PagerFilter;
 }
 
 <div class="breadcrumb-holder">
@@ -23,16 +24,34 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
-                        <h4>
-                            <a href="/Admin/Post/Edit">
-                                <input type="button" value="新增内容" class="btn btn-primary">
-                            </a>
-                        </h4>
+                    <div class="card-header ">
+                        <div class="row">
+                            <div class="col">
+                                <h4>
+                                    <a href="/Admin/Post/Edit">
+                                        <input type="button" value="新增内容" class="btn btn-primary">
+                                    </a>
+                                </h4>
+                            </div>
+
+                            <div class="col-6 d-flex">
+                                <select asp-for="@pagerFilter.PostType" class="form-control mr-2" id="postTypeFilter">
+                                    <option value="all" selected>----全部----</option>
+                                    <option value="0">新闻</option>
+                                    <option value="1">产品</option>
+                                    <option value="2">关于我们</option>
+                                    <option value="3">联系我们</option>
+                                    <option value="4">空间展示</option>
+                                    <option value="5">技术支持</option>
+                                </select>
+                                <input asp-for="@pagerFilter.SearchString" id="searchText" type="text" placeholder="输入搜索的标题" class="mr-3 form-control form-control"/>
+                                <input type="button" onclick="search()" class="btn btn-primary" value="搜索"/>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table  table-striped">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -55,11 +74,11 @@
                                             <td>@item.Name</td>
                                             <td>@item.CreatedTime.ToString("yyyy-MM-dd HH:mm")</td>
                                             <td>
-                                                <a href="/admin/Post/Edit/@item.Id">
+                                                <a href="/admin/Post/Edit/@item.Id" class="mr-2">
                                                     <input type="button" value="编辑" class="btn btn-primary">
                                                 </a>
                                                 <a href="/admin/Post/Delete/@item.Id">
-                                                    <input type="button" value="删除" class="btn btn-primary">
+                                                    <input type="button" value="删除" class="btn btn-secondary">
                                                 </a>
                                             </td>
                                         </tr>
@@ -76,3 +95,12 @@
         </div>
     </div>
 </section>
+
+<script>
+const postTypeSelectorDom=document.getElementById("postTypeFilter");
+const searchTextInputDom=document.getElementById("searchText");
+function search() {
+  let searchUrl=`/admin/Post/List?PostType=${postTypeSelectorDom.value}&&SearchString=${searchTextInputDom.value}`
+  window.open(searchUrl,"_self");
+}
+</script>
