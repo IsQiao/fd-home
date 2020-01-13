@@ -1,0 +1,28 @@
+
+@using Web.Areas.Admin.ViewComponents
+@model PagedResult<PostListViewModel> 
+@{
+    Layout = "~/Views/Shared/_LayoutWithBanner.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/">首页</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <a href="/Post/ProductList">产品列表</a>
+        </li>
+    </ol>
+</nav>
+
+<div >
+    @foreach (var item in Model.Results)
+    {
+        <div class="d-flex justify-content-between border-bottom">
+            <a href="/Post/ProductContent/@item.Id">@item.Name</a>
+            <span>@item.CreatedTime.ToString("yyyy-MM-dd")</span>
+        </div>
+    }
+    @(await Component.InvokeAsync<PaginationViewComponent>(Model))
+</div>

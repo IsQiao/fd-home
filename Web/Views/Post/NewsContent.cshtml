@@ -1,0 +1,25 @@
+@model Post
+@{
+    Layout = "~/Views/Shared/_LayoutWithBanner.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/">首页</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <a href="/Post/NewsList">新闻列表</a>
+        </li>
+         <li class="breadcrumb-item active" aria-current="page">新闻动态</li>
+    </ol>
+</nav>
+
+<h1>@Model?.Title</h1>
+<div style="font-size: 14px;" class="text-secondary">
+    创建时间:@Model?.Created.ToString("yyy-MM-dd HH:mm")
+</div>
+
+<div class="mt-2 post-body">
+    @Html.Raw(Model?.Body)
+</div>

@@ -23,6 +23,7 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Views\Auth\Login.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\Components\PaginationViewComponent.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Product\Index.cshtml" />
     </ItemGroup>
 
     <ItemGroup>

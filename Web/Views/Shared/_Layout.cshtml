@@ -42,16 +42,22 @@
                 <a class="nav-link active text-light" asp-controller="Home" asp-action="Index">首页</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-controller="Product" asp-action="Index" target="_blank">产品中心</a>
+                <a class="nav-link text-light" asp-controller="Post" asp-action="ProductList">产品中心</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="#">新闻动态</a>
+                <a class="nav-link text-light" asp-controller="Post" asp-action="NewsList">新闻动态</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="#">关于我们</a>
+                <a class="nav-link text-light" asp-controller="Post" asp-action="Display">空间展示</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="#">联系我们</a>
+                <a class="nav-link text-light" asp-controller="Post" asp-action="Support">技术支持</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-controller="Post" asp-action="AboutUs">关于我们</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" asp-controller="Post" asp-action="ContactUs">联系我们</a>
             </li>
         </ul>
     </div>
@@ -77,7 +83,7 @@
             <div class=" align-self-center bd-highlight">
                 <div class="d-flex ">
                     <p style="writing-mode: vertical-rl;text-orientation: upright;" class="align-self-center mr-1 mb-0">扫一扫</p>
-                    <img src="images/qrcode.jpg" style="width: 86px;height: 86px;"/>
+                    <img src="/images/qrcode.jpg" style="width: 86px;height: 86px;"/>
                 </div>
             </div>
         </div>
