@@ -3,6 +3,15 @@
     font-size: 0.75rem;
 }
 
+body .container {
+    width: 1140px !important;
+    max-width: 1140px !important;
+}
+
+body {
+    min-width: 1300px;
+}
+
 .blog-header-logo {
     margin-top: 37px;
     z-index: 9999;
@@ -46,6 +55,7 @@ footer {
 
 .logo-color {
     color: #e17836;
+    font-family: SimSun;
 }
 
 .product-a-box a {
@@ -121,4 +131,11 @@ footer {
 
 body {
     background-color: #f4f4f4 !important;
+}
+
+.home-second-banner {
+    height: 500px;
+    width: 100%;
+    background: url("../images/img1.jpg") no-repeat center;
+    background-size: cover;
 }
