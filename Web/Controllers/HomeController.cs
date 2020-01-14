@@ -16,7 +16,11 @@ namespace Web.Controllers
             _repository = repository;
         }
 
-        // GET
+        public IActionResult Map()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             var items = _repository.GetAllPosts();

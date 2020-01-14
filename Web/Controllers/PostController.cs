@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -70,21 +71,40 @@ namespace Web.Controllers
             return View(item);
         }
 
-        public IActionResult ProductList(PostPagerRequest viewModel)
+        public IActionResult ProductCategory()
+        {
+            var list = _dbContext
+                .PostCategory
+                .Where(x => x.PostType == PostType.Product);
+
+            return View(list);
+        }
+
+        public async Task<IActionResult> ProductList(PostPagerRequest viewModel, int? categoryId)
         {
             viewModel.PageSize = 5;
             ViewBag.PagerFilter = viewModel;
 
+            ViewBag.CategoryName = null;
+            if (categoryId != null)
+            {
+                var category = await _dbContext
+                    .PostCategory
+                    .FirstOrDefaultAsync(x => x.Id == categoryId);
+                ViewBag.CategoryName = category.Name;
+            }
+
             var list = _dbContext
                 .Posts
-                .Where(x => x.PostType == PostType.Product)
                 .Include(x => x.PostCategory)
+                .Where(x => categoryId == null || x.PostCategory.Id == categoryId)
+                .Where(x => x.PostType == PostType.Product)
                 .OrderByDescending(x => x.Created);
 
             return View(_mapper.Map<IEnumerable<PostListViewModel>>(list)
                 .GetPaged(viewModel.PageNo, viewModel.PageSize));
         }
-        
+
         public IActionResult ProductContent(int id)
         {
             var item = _dbContext.Posts
