@@ -17,14 +17,17 @@
         </ol>
     </nav>
 
-    <div>
-        @foreach (var item in Model.Results)
-        {
-            <div class="d-flex justify-content-between border-bottom">
-                <a href="/Post/ProductContent/@item.Id">@item.Name</a>
-                <span>@item.CreatedTime.ToString("yyyy-MM-dd")</span>
-            </div>
-        }
-        @(await Component.InvokeAsync<PaginationViewComponent>(Model))
+    <div class="d-flex">
+        <img src="~/images/img6.png" class="list-left"/>
+        <div class="list-right">
+            @foreach (var item in Model.Results)
+            {
+                <div class="d-flex justify-content-between border-bottom mb-2">
+                    <a href="/Post/ProductContent/@item.Id">@item.Name</a>
+                    <span>@item.CreatedTime.ToString("yyyy-MM-dd")</span>
+                </div>
+            }
+            @(await Component.InvokeAsync<PaginationViewComponent>(Model))
+        </div>
     </div>
 </div>

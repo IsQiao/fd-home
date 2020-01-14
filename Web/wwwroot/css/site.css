@@ -139,3 +139,19 @@ body {
     background: url("../images/img1.jpg") no-repeat center;
     background-size: cover;
 }
+
+.more-href{
+    color: #e17836;
+}
+
+.list-left{
+    width: 540px !important;
+    height:360px;
+    border-radius: .25rem;
+}
+.list-right{
+    padding-left: 10px;
+    width: 570px;
+}
+
+    

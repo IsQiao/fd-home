@@ -13,12 +13,15 @@
         </ol>
     </nav>
 
-    <div>
-        @foreach (var item in Model)
-        {
-            <div class="d-flex justify-content-between border-bottom">
-                <a href="/Post/ProductList?categoryId=@item.Id">@item.Name</a>
-            </div>
-        }
+    <div class="d-flex">
+        <img src="~/images/img6.png" class="list-left"/>
+        <div class="list-right">
+            @foreach (var item in Model)
+            {
+                <div class="d-flex justify-content-between border-bottom mb-2">
+                    <a href="/Post/ProductList?categoryId=@item.Id">@item.Name</a>
+                </div>
+            }
+        </div>
     </div>
 </div>

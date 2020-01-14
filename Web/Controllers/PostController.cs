@@ -24,7 +24,6 @@ namespace Web.Controllers
 
         public IActionResult NewsList(PostPagerRequest viewModel)
         {
-            viewModel.PageSize = 5;
             ViewBag.PagerFilter = viewModel;
 
             var list = _dbContext
@@ -82,7 +81,6 @@ namespace Web.Controllers
 
         public async Task<IActionResult> ProductList(PostPagerRequest viewModel, int? categoryId)
         {
-            viewModel.PageSize = 5;
             ViewBag.PagerFilter = viewModel;
 
             ViewBag.CategoryName = null;
