@@ -1,15 +1,19 @@
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Web.Data;
+using Web.Models;
 using Web.Repository;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly IRepository _repository;
+        private readonly AppDbContext _appDbContext;
 
-        public HomeController(IRepository repository)
+        public HomeController(AppDbContext appDbContext)
         {
-            _repository = repository;
+            _appDbContext = appDbContext;
         }
 
         public IActionResult Map()
@@ -19,8 +23,22 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            var items = _repository.GetAllPosts();
-            return View(items);
+            var vm = new HomeViewModel
+            {
+                Products = _appDbContext.Posts
+                    .Where(x => x.PostType == PostType.Product)
+                    .OrderByDescending(x => x.Created)
+                    .ThenBy(x => x.IconSrc).Take(7)
+                    .ToList(),
+                AboutUs = _appDbContext.Posts
+                    .FirstOrDefault(x => x.PostType == PostType.AboutUs),
+                ProductCategoryList = _appDbContext.PostCategory
+                    .Where(x => x.PostType == PostType.Product)
+                    .Take(3)
+                    .ToList()
+            };
+
+            return View(vm);
         }
     }
 }
