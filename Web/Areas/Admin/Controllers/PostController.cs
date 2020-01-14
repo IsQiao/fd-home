@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Extensions;
 using Web.Managers;
+using Web.Models;
 using Web.ViewModels;
 
 namespace Web.Controllers.Admin
@@ -30,12 +32,14 @@ namespace Web.Controllers.Admin
         public async Task<IActionResult> Edit(int? id)
         {
             var options = await _dbContext.PostCategory.ToListAsync();
-            ViewBag.AllOptions = options.Select(x => new
-            {
-                Value = x.Id,
-                x.Name,
-                x.PostType
-            }).ToList();
+
+            ViewBag.AllOptions = options
+                .Where(x => x.PostType == PostType.Product)
+                .Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name
+                }).ToList();
 
             if (id != null)
             {
@@ -79,10 +83,10 @@ namespace Web.Controllers.Admin
             });
         }
 
-        public async Task<IActionResult> List(PostPagerRequest viewModel)
+        public IActionResult List(PostPagerRequest viewModel)
         {
             ViewBag.PagerFilter = viewModel;
-            
+
             var list = _dbContext
                 .Posts
                 .Where(x => viewModel.PostType == null || x.PostType == viewModel.PostType)

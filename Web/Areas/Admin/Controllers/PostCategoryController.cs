@@ -32,6 +32,7 @@ namespace Web.Controllers.Admin
                 var exist = _dbContext.PostCategory.FirstOrDefault(x => x.Name == vm.Name && x.PostType == vm.PostType);
                 if (exist == null)
                 {
+                    vm.PostType = PostType.Product;
                     await _dbContext.PostCategory.AddAsync(vm);
                     await _dbContext.SaveChangesAsync();
                 }

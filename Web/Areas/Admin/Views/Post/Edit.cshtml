@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label>内容分类*</label>
-                                <select asp-for="PostCategoryId" class="form-control">
+                                <select asp-for="PostCategoryId" asp-items="ViewBag.AllOptions" class="form-control">
                                 </select>
                             </div>
                             <div class="form-group">
@@ -74,6 +74,7 @@
     const postCategoryDom = document.getElementsByName("PostCategoryId")[0];
     const iconDom = document.getElementsByName("Icon")[0];
     const titleDom = document.getElementsByName("Title")[0];
+    
     
     function formCommit() {
         if([0,1].indexOf(postTypeDom.value) !=-1){
@@ -123,7 +124,6 @@
     }
     
     function bindSecondSelector() {
- 
          postTypeDom.onchange = function () {
              firstSelectorChange();
          }
@@ -134,27 +134,17 @@
         const selectedVal=firstSelectorDom.value;
         if((selectedVal=="0"||selectedVal=="1")){
            showOthers(true);
+           if(selectedVal=="0"){
+               show(iconDom.parentElement,false);
+               show(postCategoryDom.parentElement,false);
+           }
         }
         else {
            showOthers(false);
            clearOthersContent();
         }
-        refreshSecondSelector(selectedVal);
     }
     
-    function refreshSecondSelector(selectedValue) {
-        const secondSelectedAllOptions = JSON.parse( '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.AllOptions))');
-        const secondSelectorDom = postCategoryDom;
-        let secondSelectorHtmlStr = "";
-        for (i = 0; i < secondSelectedAllOptions.length; i++)
-        {
-            if (secondSelectedAllOptions[i].PostType == selectedValue)
-            {
-                secondSelectorHtmlStr += "<option value='" + secondSelectedAllOptions[i].Value + "'>" + secondSelectedAllOptions[i].Name + "</option>";
-            }
-        }
-        secondSelectorDom.innerHTML = secondSelectorHtmlStr;
-    }
     
     function show(dom,isShow) {
         if(isShow){
