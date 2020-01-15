@@ -14,11 +14,11 @@
                 <p>请输入账号密码进行登陆</p>
                 <form method="post" class="text-left form-validate" asp-route="/Area/Auth/Login">
                     <div class="form-group-material">
-                        <input asp-for="UserName" value="admin" id="login-username" type="text" required data-msg="Please enter your username" class="input-material">
+                        <input asp-for="UserName" value="" id="login-username" type="text" required data-msg="Please enter your username" class="input-material">
                         <label for="login-username" class="label-material">用户名</label>
                     </div>
                     <div class="form-group-material">
-                        <input asp-for="Password" value="password" id="login-password" type="password" required data-msg="Please enter your password" class="input-material">
+                        <input asp-for="Password" value="" id="login-password" type="password" required data-msg="Please enter your password" class="input-material">
                         <label for="login-password" class="label-material">密码</label>
                     </div>
                     <div class="form-group text-center">
