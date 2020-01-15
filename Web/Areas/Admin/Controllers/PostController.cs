@@ -50,6 +50,24 @@ namespace Web.Controllers.Admin
             return View();
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            var item = await _dbContext.Posts.FirstOrDefaultAsync(x => x.Id == id);
+            
+            if (item != null)
+            {
+                _dbContext.Remove(item);
+                await _dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToRoute("area", new
+            {
+                area = "Admin",
+                controller = "Post",
+                action = "List"
+            });
+        }
+
         [HttpPost]
         public async Task<IActionResult> Edit(PostViewModel viewModel)
         {

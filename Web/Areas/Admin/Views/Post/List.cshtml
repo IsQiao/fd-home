@@ -77,9 +77,7 @@
                                                 <a href="/admin/Post/Edit/@item.Id" class="mr-2">
                                                     <input type="button" value="编辑" class="btn btn-primary">
                                                 </a>
-                                                <a href="/admin/Post/Delete/@item.Id">
-                                                    <input type="button" value="删除" class="btn btn-secondary">
-                                                </a>
+                                                <input type="button" onclick="deleteConfirm(@item.Id)" value="删除" class="btn btn-secondary">
                                             </td>
                                         </tr>
                                     }
@@ -102,5 +100,10 @@ const searchTextInputDom=document.getElementById("searchText");
 function search() {
   let searchUrl=`/admin/Post/List?PostType=${postTypeSelectorDom.value}&&SearchString=${searchTextInputDom.value}`
   window.open(searchUrl,"_self");
+}
+function deleteConfirm(id) {
+  if (window.confirm("确定要删除这条数据吗？")) { 
+    window.open(`/admin/Post/Delete/${id}`);
+  }
 }
 </script>
