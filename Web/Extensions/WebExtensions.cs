@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Web.Models;
 using Web.ViewModels;
 
@@ -20,6 +21,11 @@ namespace Web.Extensions
                 PostType.Support => "技术支持",
                 _ => ""
             };
+        }
+        
+        public static string StripHTMLTags(this string input)
+        {
+            return Regex.Replace(input, "<.*?>", replacement: string.Empty);
         }
 
         public static PagedResult<T> GetPaged<T>(this IEnumerable<T> query,

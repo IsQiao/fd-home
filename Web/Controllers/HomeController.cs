@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Web.Data;
+using Web.Extensions;
 using Web.Models;
 using Web.Repository;
 using Web.ViewModels;
@@ -37,6 +38,11 @@ namespace Web.Controllers
                     .Take(3)
                     .ToList()
             };
+
+            if (vm.AboutUs != null)
+            {
+                vm.AboutUs.Body = vm.AboutUs.Body.StripHTMLTags();
+            }
 
             return View(vm);
         }
