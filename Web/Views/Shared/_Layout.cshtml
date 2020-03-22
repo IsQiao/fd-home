@@ -23,10 +23,10 @@
             <img src="~/images/fandu_logo.png" style="height: 60px;"/>
         </div>
         <div class="right ">
-            <span class="header-right-item header-right-fav" onclick="alert('收藏本站,请使用Ctrl+D进行收藏.')"></span>
+            <span class="header-right-item header-right-fav" title="收藏本站" onclick="alert('收藏本站,请使用Ctrl+D进行收藏.')"></span>
             <span class="header-right-item header-right-mobile" title="联系方式:13166299000" onclick="alert('联系方式:13166299000')"></span>
             <a href="/Post/ContactUs">
-                <span class="header-right-item header-right-shop"></span>
+                <span class="header-right-item header-right-shop" title="联系凡渡"></span>
             </a>
         </div>
     </div>
@@ -63,20 +63,23 @@
 
         <div class="d-flex align-items-stretch" style="height: 100%;">
             <div style="height: 100%;">
-                <img src="~/images/logo.png" style="height: 70px; margin-top: -4px;" alt=""/>
+                <img src="~/images/fandu_logo.png" style="height: 70px;margin-top: 43px; margin-left: 72px;" alt=""/>
             </div>
             <div class="d-flex flex-column flex-grow-1 bd-highlight">
                 <div class="d-flex align-items-center "style="height: 100%;">
                     <div class="d-flex flex-column bd-highlight" style="text-align: center; margin: 0 auto;">
-                        <div class="p-1 bd-highlight">地址：上海市普陀区XX路XX号303 邮编：12345 电话：130-123456 13888888888 邮箱：xxxx@xx.com</div>
+                        <div class="p-1 bd-highlight">联系方式：13166299000 地址：上海市闵行区新虹街道丰虹路199号星月虹桥中心2号楼 邮政编码：201100</div>
                         <div class="p-1 bd-highlight">©2019-@DateTime.Now.Year 上海凡渡装饰材料有限公司 沪ICP备19047475号</div>
                     </div>
                 </div>
             </div>
-            <div class=" align-self-center bd-highlight">
-                <div class="d-flex ">
-                    <p style="writing-mode: vertical-rl;text-orientation: upright;" class="align-self-center mr-1 mb-0">扫一扫</p>
-                    <img src="/images/qrcode.jpg" style="width: 86px;height: 86px;"/>
+            <div class=" align-self-center bd-highlight footer-wechat-box">
+                <p class="focus-us">关注我们</p>
+                <img src="~/images/wechat.png" class="footer-wechat"/>
+                <div class="footer-wechat-code">  
+                    <div class="footer-wechat-code-arrow">
+                    </div>
+                    <img src="~/images/qrcode.jpg"/>
                 </div>
             </div>
         </div>
