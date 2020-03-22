@@ -6,58 +6,51 @@
     <meta name="viewport" content="width=1300, initial-scale=1, shrink-to-fit=no">
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/qiao-styles.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/site.js"></script>
 </head>
 <body>
-<div class="bg-white bg-white border-bottom">
-    <div class="blog-header d-flex align-items-center container">
-        <div class="blog-header-logo">
-            <img src="~/images/logo.png"></img>
+<div class="bg-white bg-white">
+    <div class="d-flex justify-content-between container header-top">
+        <div class="input-box search-box">
+            <input type="text" class="q-input q-input-s w-100 mb-1 bd-1" placeholder="">
+            <i class="i i-search pos-feedback-s"></i>
         </div>
-        <div class="blog-header-right ml-md-auto">
-            <ul class="navbar-nav flex-md-row">
-                @* <li class="nav-item px-2"> *@
-                @*     <a href="/admin/">登陆</a> *@
-                @* </li>| *@
-                <li class="nav-item px-2 ">
-                    全国服务热线：<span class="main-color">400-123-234-345</span>
-                </li>|
-                <li class="nav-item px-2">
-                    <a href="#" class="text-dark" onclick="alert('收藏本站,请使用Ctrl+D进行收藏.')">收藏本站</a>
-                </li>|
-                <li class="nav-item px-2">
-                    <a href="/home/map" class="text-dark">网站地图</a>
-                </li>
-            </ul>
+        <div class="">
+            <img src="~/images/fandu_logo.png" style="height: 60px;"/>
+        </div>
+        <div class="right ">
+            <span class="header-right-item header-right-fav" onclick="alert('收藏本站,请使用Ctrl+D进行收藏.')"></span>
+            <span class="header-right-item header-right-mobile" title="联系方式:13166299000" onclick="alert('联系方式:13166299000')"></span>
+            <a href="/Post/ContactUs">
+                <span class="header-right-item header-right-shop"></span>
+            </a>
         </div>
     </div>
 </div>
-<div id="navbarMain" class="  sticky-top">
+<div id="navbarMain" class="bg-white sticky-top">
     <div class="container">
-        <ul class="web-nav nav justify-content-end ">
+        <ul class="web-nav nav justify-content-center ">
             <li class="nav-item">
-                <a class="nav-link active text-light" asp-controller="Home" asp-action="Index">首页</a>
+                <a class="nav-link active" asp-controller="Home" asp-action="Index">首页</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-controller="Post" asp-action="ProductCategory">产品中心</a>
+                <a class="nav-link " asp-controller="Post" asp-action="ProductCategory">产品中心</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-controller="Post" asp-action="NewsList">新闻动态</a>
+                <a class="nav-link " asp-controller="Post" asp-action="Display">空间展示</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-controller="Post" asp-action="Display">空间展示</a>
+                <a class="nav-link " asp-controller="Post" asp-action="NewsList">新闻动态</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-controller="Post" asp-action="Support">技术支持</a>
+                <a class="nav-link " asp-controller="Post" asp-action="AboutUs">关于我们</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" asp-controller="Post" asp-action="AboutUs">关于我们</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" asp-controller="Post" asp-action="ContactUs">联系我们</a>
+                <a class="nav-link " asp-controller="Post" asp-action="ContactUs">联系凡渡</a>
             </li>
         </ul>
     </div>
