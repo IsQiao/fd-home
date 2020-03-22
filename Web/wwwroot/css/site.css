@@ -26,11 +26,16 @@ body {
 }
 
 #navbarMain {
-    padding: 4px 0;
+    padding: 2px 0;
 }
 
 #navbarMain .nav-item a {
-    color: #787677;
+    color: black;
+}
+
+.nav-item:hover,.nav-item .active{
+    font-weight: bold;
+    /*background-color: #F0F1F2;*/
 }
 
 .carousel-inner {
@@ -43,7 +48,7 @@ body {
 
 .navbar-fixed {
     /*background-color: #383032 !important;*/
-    border-bottom: 1px solid;
+    /*border-bottom: 1px solid;*/
 }
 
 footer {
@@ -54,7 +59,7 @@ footer {
 }
 
 .logo-color {
-    color: #e17836;
+    color: black;
     font-family: SimSun;
 }
 
@@ -140,7 +145,7 @@ body {
 .home-second-banner {
     height: 500px;
     width: 100%;
-    background: url("../images/img1.jpg") no-repeat center;
+    background: url("../images/img1.png") no-repeat center;
     background-size: cover;
 }
 
@@ -187,6 +192,11 @@ body {
     background-size: 20px 20px;
     margin-right: 10px;
     cursor: pointer;
+    opacity: 0.6;
+}
+
+.header-right-item:hover {
+    opacity: 1;
 }
 
 .header-right-fav {

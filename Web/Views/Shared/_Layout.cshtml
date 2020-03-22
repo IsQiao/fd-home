@@ -35,22 +35,22 @@
     <div class="container">
         <ul class="web-nav nav justify-content-center ">
             <li class="nav-item">
-                <a class="nav-link active" asp-controller="Home" asp-action="Index">首页</a>
+                <a class="nav-link @(ViewBag.ActiveIndex == 0 ? "active" : "")" asp-controller="Home" asp-action="Index">首页</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " asp-controller="Post" asp-action="ProductCategory">产品中心</a>
+                <a class="nav-link @(ViewBag.ActiveIndex == 1 ? "active" : "")" asp-controller="Post" asp-action="ProductCategory">产品中心</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " asp-controller="Post" asp-action="Display">空间展示</a>
+                <a class="nav-link @(ViewBag.ActiveIndex == 2 ? "active" : "")" asp-controller="Post" asp-action="Display">空间展示</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " asp-controller="Post" asp-action="NewsList">新闻动态</a>
+                <a class="nav-link @(ViewBag.ActiveIndex == 3 ? "active" : "")" asp-controller="Post" asp-action="NewsList">新闻动态</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " asp-controller="Post" asp-action="AboutUs">关于我们</a>
+                <a class="nav-link @(ViewBag.ActiveIndex == 4 ? "active" : "")" asp-controller="Post" asp-action="AboutUs">关于我们</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " asp-controller="Post" asp-action="ContactUs">联系凡渡</a>
+                <a class="nav-link @(ViewBag.ActiveIndex == 5 ? "active" : "")" asp-controller="Post" asp-action="ContactUs">联系凡渡</a>
             </li>
         </ul>
     </div>

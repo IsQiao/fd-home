@@ -1,6 +1,7 @@
 @model HomeViewModel
 @{
     Layout = "~/Views/Shared/_LayoutWithBanner.cshtml";
+    ViewBag.ActiveIndex = 0;
 }
 
 <div class="container">
@@ -11,7 +12,7 @@
         <img src="/images/img4.png"/>
     </div>
     <div class="d-flex justify-content-center">
-        <span style="font-size: 0.8rem; margin-top: 4px;">我们产品的高质量源于对细节的精确</span>
+        <span style="font-size: 0.8rem; margin-top: 4px;">Product Center</span>
     </div>
     <div class="prod-nav-container">
         <div class="prod-nav mt-3">
@@ -99,10 +100,11 @@
     </div>
 </div>
 
-<div class="home-second-banner mt-3 bg-dark">
+<div class="container mt-3">
+    <img src="~/images/img1.png" style="width: 100%;"/>
 </div>
 
-<div class="container">
+<div class="container mt-3">
     <div class="d-flex justify-content-center mt-3">
         <h3 class="logo-color">关于我们</h3>
     </div>
@@ -110,7 +112,7 @@
         <img src="/images/img4.png"/>
     </div>
     <div class="d-flex justify-content-center">
-        <span style="font-size: 0.8rem; margin-top: 4px;">我们产品的高质量源于对细节的精确</span>
+        <span style="font-size: 0.8rem; margin-top: 4px;">About Us</span>
     </div>
 
     <div class="d-flex mt-3">
