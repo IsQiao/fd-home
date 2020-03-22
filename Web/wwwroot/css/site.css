@@ -3,6 +3,10 @@
     font-size: 0.75rem;
 }
 
+* {
+    font-family: Arial, 'Times New Roman', 'YouYuan', 'SimHei', 'Hiragino Sans GB', 'Microsoft YaHei', SimHei;
+}
+
 body .container {
     width: 1140px !important;
     max-width: 1140px !important;
@@ -60,7 +64,6 @@ footer {
 
 .logo-color {
     color: black;
-    font-family: SimSun;
 }
 
 .main-color {
